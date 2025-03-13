@@ -1111,11 +1111,11 @@ export function issuer<
       mode: "access"
       type: keyof SubjectSchema
       properties: v1.InferInput<SubjectSchema[keyof SubjectSchema]>
-    }>(token, () => signingKey.then((item) => item.public), {
+    }>(token, () => signingKey().then((item) => item.public), {
       issuer: issuer(c),
     })
 
-    const validated = await input.subjects[result.payload.type][
+    const validated = await input.subjects![result.payload.type][
       "~standard"
     ].validate(result.payload.properties)
 
